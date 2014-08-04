@@ -11,7 +11,7 @@ void ledStatus(void) {
         PORTB |= (1 << LED);
     else if(counter == millis(250) || counter == millis(350))
         PORTB &= ~(1 << LED);
-    else if(counter == millis(2000))
+    else if(counter == millis(1000))
         counter = 0;
 }
 
