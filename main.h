@@ -12,7 +12,7 @@
 #elif defined(__AVR_ATmega8__)
 #define LED             DDB5
 #elif defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
-#define LED             DDB2
+#define LED             DDB3
 #endif
 
 #define forever()               while(1)
