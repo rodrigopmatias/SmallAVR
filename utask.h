@@ -18,8 +18,8 @@
 #define TCNT                    TCNT0
 #endif
 
-#ifndef UTASK_FIFO_SIZE
-#define UTASK_FIFO_SIZE         5U
+#ifndef UTASK_QUEUE_SIZE
+#define UTASK_QUEUE_SIZE         5U
 #endif
 
 #ifndef UTASK_OVF_SIZE

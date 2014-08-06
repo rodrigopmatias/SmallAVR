@@ -2,7 +2,7 @@
 
 static uint8_t start_ovf = 0;
 
-static task_t __queue[UTASK_FIFO_SIZE];
+static task_t __queue[UTASK_QUEUE_SIZE];
 
 ISR(TIMER0_OVF_vect) {
     static uint8_t ovf_counter = 0;
@@ -13,7 +13,7 @@ ISR(TIMER0_OVF_vect) {
 
     if(ovf_counter == UTASK_OVF_SIZE) {
         ovf_counter = 0;
-        for(idx = 0; idx < UTASK_FIFO_SIZE; idx++)
+        for(idx = 0; idx < UTASK_QUEUE_SIZE; idx++)
             if(__queue[idx].fn) __queue[idx].fn();
     }
 }
@@ -39,12 +39,12 @@ void utaskConfigure(void) {
     TCNT = start_ovf;
     sei();
 
-    for(idx = 0; idx < UTASK_FIFO_SIZE;idx++)
+    for(idx = 0; idx < UTASK_QUEUE_SIZE;idx++)
         __queue[idx].fn = 0;
 }
 
 void utaskRegister(const uint8_t position, void (* fn)(void)) {
-    if(position < UTASK_FIFO_SIZE) {
+    if(position < UTASK_QUEUE_SIZE) {
         __queue[position].fn = fn;
     }
 }
