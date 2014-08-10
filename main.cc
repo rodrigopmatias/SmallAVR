@@ -21,6 +21,9 @@ int main(void) {
     utaskConfigure();
     utaskRegister(0, ledStatus);
 
+    uartInit();
+    uartAsStdio();
+
     set_sleep_mode(SLEEP_MODE_IDLE);
     forever() {
         sleep_mode();

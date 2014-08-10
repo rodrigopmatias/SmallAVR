@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <avr/sleep.h>
+#include "uart.h"
 #include "utask.h"
 
 #if defined(__AVR_ATmega640__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
