@@ -12,7 +12,7 @@
 /**
  * This function start enviroment for UART communication
  **/
-void uartInit(void);
+void uartInit(void) __attribute__((always_inline));
 
 /**
  * This function send byte for UART.
