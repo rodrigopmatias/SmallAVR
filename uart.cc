@@ -4,31 +4,30 @@ void uartPutCharStream(char c, FILE * stream);
 char uartGetCharStream(FILE * stream);
 
 void uartInit(void) {
-    UBRRH = UBRRH_VALUE;
-    UBRRL = UBRRL_VALUE;
+    UBRRxH = UBRRH_VALUE;
+    UBRRxL = UBRRL_VALUE;
 
     fdev_setup_stream(&uartInput, 0, uartGetCharStream, _FDEV_SETUP_READ);
     fdev_setup_stream(&uartOutput, uartPutCharStream, 0, _FDEV_SETUP_WRITE);
 
     #if USE_2X
-    UCSRA |= _BV(U2X);
+    UCSRxA |= _BV(U2Xx);
     #else
-    UCSRA &= ~(_BV(U2X));
+    UCSRxA &= ~(_BV(U2Xx));
     #endif
 
-    UCSRC = _BV(UCSZ1) | _BV(UCSZ0); /* 8-bit data */
-    UCSRB = _BV(RXEN) | _BV(TXEN);   /* Enable RX and TX */
+    UCSRxC = _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
+    UCSRxB = _BV(RXENx) | _BV(TXENx);   /* Enable RX and TX */
 }
 
 void uartPutChar(char c) {
-    if(c == '\n') uartPutChar('\r');
-    loop_until_bit_is_set(UCSRA, TXC); /* Wait until transmission ready. */
-    UDR = c;
+    while(!UCSRxA & (1 << TXCx));  //Wait until transmission ready.
+    UDRx = c;
 }
 
 char uartGetChar(void) {
-    loop_until_bit_is_set(UCSRA, RXC); /* Wait until data exists. */
-    return UDR;
+    while(!UCSRxA & (1 << RXCx));  //Wait until transmission ready.
+    return UDRx;
 }
 
 char uartGetCharStream(FILE * stream) {

@@ -12,9 +12,11 @@ ISR(TIMER0_OVF_vect) {
     TCNT = start_ovf;
 
     if(ovf_counter == UTASK_OVF_SIZE) {
+        cli();
         ovf_counter = 0;
         for(idx = 0; idx < UTASK_QUEUE_SIZE; idx++)
             if(__queue[idx].fn) __queue[idx].fn();
+        sei();
     }
 }
 

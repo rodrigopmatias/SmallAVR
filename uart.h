@@ -1,13 +1,26 @@
 #ifndef __UART_H__
 #define __UART_H__
 
+#include <avr/io.h>
+#include <stdio.h>
+
+#if defined(__AVR_ATmega48A__) || defined(__AVR_ATmega48PA__) || \
+        defined(__AVR_ATmega88A__) || defined(__AVR_ATmega88PA__) || \
+        defined(__AVR_ATmega168A__) || defined(__AVR_ATmega168PA__) || \
+        defined(__AVR_ATmega328P__)
+#include <stdavr/uart/uart-328p.h>
+#elif defined(__AVR_ATmega8__)
+#include <stdavr/uart/uart-8.h>
+#else
+#error uC not supported!
+#endif
+
 #ifndef BAUD
 #define BAUD        9600
 #endif //BAUD
 
-#include <avr/io.h>
 #include <util/setbaud.h>
-#include <stdio.h>
+
 
 /**
  * This function start enviroment for UART communication
