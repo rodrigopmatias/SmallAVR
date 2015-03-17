@@ -23,13 +23,13 @@ typedef struct {
  * This function configure the clock and prepare the __fifo of tasks to run the
  * tasks.
  **/
-void utaskConfigure(void) __attribute__((always_inline));
+void utaskConfigure(void);
 
 /**
  * This function register the function fn in __fifo for run in the task enviroment.
  * @param position, the position of task in the __fifo
  * @param fn, the function that define task.
  **/
-void utaskRegister(const uint8_t position, void (* fn)(void)) __attribute__((always_inline));
+void utaskRegister(const uint8_t position, void (* fn)(void));
 
 #endif /* __UTASK_H__ */
