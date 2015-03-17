@@ -1,4 +1,4 @@
-utask
-=====
+Small AVR Library
+=================
 
-Small lib for work with task in uC 
+Small library for work with uC of family AVR. This library is Open Source and is focused em ser simples e funcional.
