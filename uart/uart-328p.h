@@ -14,8 +14,11 @@
 #define RXENx    RXEN0
 #define TXENx    TXEN0
 #define RXCx     RXC0
+#define RXCIEx   RXCIE0
 #define TXCx     TXC0
+#define TXCIEx   TXCIE0
 #define UDRx     UDR0
 #define UDREx    UDRE0
+#define URSELx   URSEL0
 
 #endif /* __UART_328P__ */
