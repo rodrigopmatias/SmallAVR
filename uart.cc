@@ -16,13 +16,15 @@ void uartInit(void) {
     UCSRxA &= ~(_BV(U2Xx));
     #endif
 
-    UCSRxC |= _BV(URSELx) | _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
     UCSRxB |= _BV(RXENx) | _BV(TXENx) | _BV(RXCIEx) | _BV(TXCIEx);
+    #ifdef URSELx
+    UCSRxC |= _BV(URSELx) | _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
+    #else
+    UCSRxC |= _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
+    #endif
 
-    __fifo.nav_rx = 0;
-    __fifo.nav_tx = 0;
-    __fifo.pos_rx = 0;
-    __fifo.pos_tx = 0;
+    fifo_init(&__rx_buffer, __rx_buffer_memory, USART_RX_BUFFER_SIZE);
+    fifo_init(&__tx_buffer, __tx_buffer_memory, USART_TX_BUFFER_SIZE);
 }
 
 void uartPutChar(uint8_t c) {

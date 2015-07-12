@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <inttypes.h>
 
+#include <SmallAVR/data/fifo.h>
+
 #if defined(__AVR_ATmega48A__) || defined(__AVR_ATmega48PA__) || \
         defined(__AVR_ATmega88A__) || defined(__AVR_ATmega88PA__) || \
         defined(__AVR_ATmega168A__) || defined(__AVR_ATmega168PA__) || \
@@ -30,19 +32,11 @@
 #define USART_RX_BUFFER_SIZE     32
 #endif
 
-typedef struct _buffer_t  buffer_t;
+static uint8_t __rx_buffer_memory[USART_RX_BUFFER_SIZE];
+static uint8_t __tx_buffer_memory[USART_TX_BUFFER_SIZE];
 
-struct _buffer_t {
-    uint16_t nav_rx;
-    uint16_t nav_tx;
-    uint16_t pos_rx;
-    uint16_t pos_tx;
-
-    uint8_t rx_buffer[USART_RX_BUFFER_SIZE];
-    uint8_t tx_buffer[USART_TX_BUFFER_SIZE];
-};
-
-static buffer_t __fifo;
+static fifo_buffer_t __rx_buffer;
+static fifo_buffer_t __tx_buffer;
 
 /**
  * This function start enviroment for UART communication

@@ -19,6 +19,6 @@
 #define TXCIEx   TXCIE0
 #define UDRx     UDR0
 #define UDREx    UDRE0
-#define URSELx   URSEL0
+// #define URSELx   URSEL0
 
 #endif /* __UART_328P__ */
