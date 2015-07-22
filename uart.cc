@@ -14,20 +14,20 @@ void uartInit(void) {
     fdev_setup_stream(&uartInput, 0, uartGetCharStream, _FDEV_SETUP_READ);
     fdev_setup_stream(&uartOutput, uartPutCharStream, 0, _FDEV_SETUP_WRITE);
 
-    cli();
+    // cli();
     #if USE_2X
     UCSRxA |= _BV(U2Xx);
     #else
     UCSRxA &= ~(_BV(U2Xx));
     #endif
 
-    UCSRxB = _BV(RXENx) | _BV(TXENx) | _BV(RXCIEx) | _BV(TXCIEx);
+    UCSRxB = _BV(RXENx) | _BV(TXENx) | _BV(RXCIEx);
     #ifdef URSELx
     UCSRxC = _BV(URSELx) | _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
     #else
     UCSRxC = _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
     #endif
-    sei();
+    // sei();
 
     fifo_init(&__rx_buffer, __rx_buffer_memory, UART_RX_BUFFER_SIZE);
 }
