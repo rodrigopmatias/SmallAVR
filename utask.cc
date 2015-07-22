@@ -7,17 +7,21 @@ static task_t __queue[UTASK_QUEUE_SIZE];
 ISR(TIMER0_OVF_vect) {
     static uint8_t ovf_counter = 0;
     uint8_t idx;
+    uint8_t sreg;
 
+
+    sreg = SREG;
+    cli();
     ovf_counter++;
     TCNT = start_ovf;
 
     if(ovf_counter == UTASK_OVF_SIZE) {
-        cli();
         ovf_counter = 0;
         for(idx = 0; idx < UTASK_QUEUE_SIZE; idx++)
             if(__queue[idx].fn) __queue[idx].fn();
-        sei();
     }
+    sei();
+    SREG = sreg;
 }
 
 void utaskConfigure(void) {
