@@ -1,5 +1,5 @@
-#ifndef __UART_8__
-#define __UART_8__
+#ifndef __USART_8__
+#define __USART_8__
 
 #include <avr/io.h>
 
@@ -22,4 +22,4 @@
 #define UDREx    UDRE
 #define URSELx   URSEL
 
-#endif /* __UART_8__ */
+#endif /* __USART_8__ */

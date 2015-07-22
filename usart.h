@@ -1,5 +1,5 @@
-#ifndef __UART_H__
-#define __UART_H__
+#ifndef __USART_H__
+#define __USART_H__
 
 #include <avr/io.h>
 #include <stdio.h>
@@ -11,9 +11,9 @@
         defined(__AVR_ATmega88A__) || defined(__AVR_ATmega88PA__) || \
         defined(__AVR_ATmega168A__) || defined(__AVR_ATmega168PA__) || \
         defined(__AVR_ATmega328P__)
-#include <SmallAVR/uart/uart-328p.h>
+#include <SmallAVR/usart/usart-328p.h>
 #elif defined(__AVR_ATmega8__)
-#include <SmallAVR/uart/uart-8.h>
+#include <SmallAVR/usart/usart-8.h>
 #else
 #error uC not supported!
 #endif
@@ -32,35 +32,29 @@
 #define USART_RX_BUFFER_SIZE     32
 #endif
 
-static uint8_t __rx_buffer_memory[USART_RX_BUFFER_SIZE];
-static uint8_t __tx_buffer_memory[USART_TX_BUFFER_SIZE];
-
-static fifo_buffer_t __rx_buffer;
-static fifo_buffer_t __tx_buffer;
-
 /**
- * This function start enviroment for UART communication
+ * This function start enviroment for USART communication
  **/
-void uartInit(void);
+void usartInit(void);
 
 /**
- * This function send byte for UART.
+ * This function send byte for USART.
  * @param c byte to send
  **/
-void uartPutChar(uint8_t c);
+void usartPutChar(uint8_t c);
 
 /**
- * This function read byte from UART.
- * @return Return one byte from UART.
+ * This function read byte from USART.
+ * @return Return one byte from USART.
  **/
-uint8_t uartGetChar(void);
+uint8_t usartGetChar(void);
 
 /**
- * This function make the UART as default IO of system.
+ * This function make the USART as default IO of system.
  **/
-void uartAsStdio(void);
+void usartAsStdio(void);
 
-static FILE uartOutput;
-static FILE uartInput;
+static FILE usartOutput;
+static FILE usartInput;
 
-#endif //__UART_H__
+#endif //__USART_H__
