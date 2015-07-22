@@ -23,6 +23,6 @@
 #define UDRIEx   UDRIE0
 // #define URSELx   URSEL0
 
-#define __UART_RX_READY_INTERRUPT       UART_RXC_vect
+#define __UART_RX_READY_INTERRUPT       USART_RX_vect 
 
 #endif /* __UART_328P__ */

@@ -22,4 +22,6 @@
 #define UDREx    UDRE
 #define URSELx   URSEL
 
+#define __UART_RX_READY_INTERRUPT       USART_RXC_vect 
+
 #endif /* __UART_8__ */
