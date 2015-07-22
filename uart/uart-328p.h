@@ -2,7 +2,6 @@
 #define __UART_328P__
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
 
 #define UBRRxH   UBRR0H
 #define UBRRxL   UBRR0L
@@ -23,6 +22,6 @@
 #define UDRIEx   UDRIE0
 // #define URSELx   URSEL0
 
-#define __UART_RX_READY_INTERRUPT       USART_RX_vect 
+#define __UART_RX_READY_INTERRUPT       USART_RX_vect
 
 #endif /* __UART_328P__ */
