@@ -35,6 +35,11 @@
 void uartInit(void);
 
 /**
+ * This function check if rx buffer is empty
+ **/
+uint8_t uartBufferIsEmpty(void);
+
+/**
  * This function send byte for UART.
  * @param c byte to send
  **/

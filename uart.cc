@@ -14,7 +14,6 @@ void uartInit(void) {
     fdev_setup_stream(&uartInput, 0, uartGetCharStream, _FDEV_SETUP_READ);
     fdev_setup_stream(&uartOutput, uartPutCharStream, 0, _FDEV_SETUP_WRITE);
 
-    // cli();
     #if USE_2X
     UCSRxA |= _BV(U2Xx);
     #else
@@ -27,13 +26,16 @@ void uartInit(void) {
     #else
     UCSRxC = _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
     #endif
-    // sei();
 
     fifo_init(&__rx_buffer, __rx_buffer_memory, UART_RX_BUFFER_SIZE);
 }
 
+uint8_t uartBufferIsEmpty(void) {
+    return fifo_is_empty(&__rx_buffer);
+}
+
 void uartPutChar(uint8_t c) {
-    while(!UCSRxA & (1 << TXCx));
+    loop_until_bit_is_set(UCSRxA, UDREx);
     UDRx = c;
 }
 
@@ -58,7 +60,6 @@ void uartAsStdio(void) {
 }
 
 ISR(__UART_RX_READY_INTERRUPT) {
-    cli();
-    if(!fifo_is_full(&__rx_buffer)) fifo_push(&__rx_buffer, (const uint8_t)UDRx);
-    sei();
+    if(!fifo_is_full(&__rx_buffer))
+        fifo_push(&__rx_buffer, (const uint8_t)UDRx);
 }
