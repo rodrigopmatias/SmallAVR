@@ -1,6 +1,6 @@
 #include "fifo.h"
 
-void fifo_init(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size) {
+void fifoInit(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size) {
     fifo->index = 0;
     fifo->size = 0;
     fifo->max_size = size;
@@ -12,7 +12,7 @@ void fifo_init(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size) {
         fifo->data[i] = '\0';
 }
 
-uint8_t fifo_push(fifo_buffer_ptr fifo, const uint8_t data) {
+uint8_t fifoPush(fifo_buffer_ptr fifo, const uint8_t data) {
     if(fifo->size < fifo->max_size) {
         fifo->data[fifo->next] = data;
         fifo->next++;
@@ -27,7 +27,7 @@ uint8_t fifo_push(fifo_buffer_ptr fifo, const uint8_t data) {
         return FIFO_FULL;
 }
 
-uint8_t fifo_pop(fifo_buffer_ptr fifo) {
+uint8_t fifoPop(fifo_buffer_ptr fifo) {
     uint8_t data;
 
     if(fifo->size > 0) {
@@ -43,10 +43,10 @@ uint8_t fifo_pop(fifo_buffer_ptr fifo) {
         return FIFO_EMPTY;
 }
 
-uint8_t fifo_is_full(fifo_buffer_ptr fifo) {
+uint8_t fifoIsFull(fifo_buffer_ptr fifo) {
     return (fifo->size >= fifo->max_size);
 }
 
-uint8_t fifo_is_empty(fifo_buffer_ptr fifo) {
+uint8_t fifoIsEmpty(fifo_buffer_ptr fifo) {
     return (fifo->size == 0);
 }

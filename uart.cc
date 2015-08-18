@@ -27,11 +27,11 @@ void uartInit(void) {
     UCSRxC = _BV(UCSZx1) | _BV(UCSZx0); /* 8-bit data */
     #endif
 
-    fifo_init(&__rx_buffer, __rx_buffer_memory, UART_RX_BUFFER_SIZE);
+    fifoInit(&__rx_buffer, __rx_buffer_memory, UART_RX_BUFFER_SIZE);
 }
 
 uint8_t uartBufferIsEmpty(void) {
-    return fifo_is_empty(&__rx_buffer);
+    return fifoIsEmpty(&__rx_buffer);
 }
 
 void uartPutChar(uint8_t c) {
@@ -40,8 +40,8 @@ void uartPutChar(uint8_t c) {
 }
 
 uint8_t uartGetChar(void) {
-    if(!fifo_is_empty(&__rx_buffer))
-        return fifo_pop(&__rx_buffer);
+    if(!fifoIsEmpty(&__rx_buffer))
+        return fifoPop(&__rx_buffer);
     else
         return 0x0;
 }
@@ -60,6 +60,6 @@ void uartAsStdio(void) {
 }
 
 ISR(__UART_RX_READY_INTERRUPT) {
-    if(!fifo_is_full(&__rx_buffer))
-        fifo_push(&__rx_buffer, (const uint8_t)UDRx);
+    if(!fifoIsFull(&__rx_buffer))
+        fifoPush(&__rx_buffer, (const uint8_t)UDRx);
 }

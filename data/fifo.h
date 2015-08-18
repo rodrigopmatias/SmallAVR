@@ -37,7 +37,7 @@ struct __fifo_buffer {
  * @param memory
  * @param size size of memory in buffer
  */
-void fifo_init(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size);
+void fifoInit(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size);
 
 /**
  * push data in buffer memory
@@ -45,27 +45,27 @@ void fifo_init(fifo_buffer_ptr fifo, uint8_t * memory, const uint16_t size);
  * @param data byte to store in buffer memory
  * @return FIFO_SUCCESS when data is stored or FIFO_FULL if memory is full.
  */
-uint8_t fifo_push(fifo_buffer_ptr fifo, const uint8_t data);
+uint8_t fifoPush(fifo_buffer_ptr fifo, const uint8_t data);
 
 /**
  * pop data of memory
  * @param fifo poniter for buffer information
  * @return data in memory or FIFO_EMPTY if memory data is empty
  */
-uint8_t fifo_pop(fifo_buffer_ptr fifo);
+uint8_t fifoPop(fifo_buffer_ptr fifo);
 
 /**
  * check if memory data is full
  * @param fifo poniter for buffer information
  * @return FIFO_YES if memory is full or FIFO_NO.
  */
-uint8_t fifo_is_full(fifo_buffer_ptr fifo);
+uint8_t fifoIsFull(fifo_buffer_ptr fifo);
 
 /**
  * check if memory data is empty
  * @param fifo poniter for buffer information
  * @return FIFO_YES if memory data is empty of FIFO_NO.
  */
-uint8_t fifo_is_empty(fifo_buffer_ptr fifo);
+uint8_t fifoIsEmpty(fifo_buffer_ptr fifo);
 
 #endif
